@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Froom.Package.Helpers;
 using Froom.Tests.Models;
 using Xunit;
@@ -66,6 +68,29 @@ public class FroomIs
         Assert.NotEmpty(list);
     }
 
+
+    [Fact]
+    public async Task MappingFileAsync()
+    {
+        var list = froom.LoadAsync<Result>().FileAsync(@"c:\zepto\files\responses.csv").MapCsvLineByLineAsync((result, line) =>
+        {
+            var data = line.Split(',');
+            
+            if (!data.LineHasAllColumns(3)) return;
+            
+            result.Id = data.Column(0);
+            result.ResultId = data.Column(1);
+            result.Status = data.Column(2);
+
+        }).ToListAsync();
+        
+        await foreach (var item in list)
+        {
+            _testOutputHelper.WriteLine(item?.Id);
+            Assert.NotNull(item?.Id);
+        }
+        
+    }
 
     private static void ResultParser(Results? l, string? s)
     {

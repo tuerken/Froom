@@ -1,16 +1,14 @@
 ﻿using System.Collections;
 using System.Text.Json;
 using Froom.Package.Exceptions;
-using Froom.Package.Interfaces;
+using Froom.Package.Interfaces.Sync;
 
-namespace Froom.Package;
+namespace Froom.Package._Sync;
 
-public sealed class FroomFluid<T> : ILoadFile<T>, IMapFile<T>, ILoop<T> where T : IList, new()
+public sealed class FroomFluid<T> : Fluid<T>, ILoadFile<T>, IMapFile<T>, ILoop<T> where T : IList, new()
 {
-    private string? Data { get; set; }
-    private T? Object { get; set; }
-
-
+    private T? Items { get; set; }
+    
     internal FroomFluid()
     {
     }
@@ -21,6 +19,7 @@ public sealed class FroomFluid<T> : ILoadFile<T>, IMapFile<T>, ILoop<T> where T 
         Data = System.IO.File.ReadAllText(path);
         return this;
     }
+
 
     public IMapFile<T> Text(string? text)
     {
@@ -34,16 +33,16 @@ public sealed class FroomFluid<T> : ILoadFile<T>, IMapFile<T>, ILoop<T> where T 
     {
         if (Data is null) return default;
 
-        return Object;
+        return Items;
     }
 
-    public ILoop<T>? Map(Action<T?, string?> action)
+    public ILoop<T> Map(Action<T, string> action)
     {
-        if (Data is null) return default;
+        if (Data is null) return this;
 
-        Object = new T();
+        Items = new T();
 
-        action.Invoke(Object, Data);
+        action.Invoke(Items, Data);
 
         return this;
     }
@@ -52,8 +51,8 @@ public sealed class FroomFluid<T> : ILoadFile<T>, IMapFile<T>, ILoop<T> where T 
     {
         if (Data is null) return this;
         // var isJson = Data.Trim().StartsWith("[") || Data.Trim().StartsWith("{");
-        Object = JsonSerializer.Deserialize<T>(Data,
-            options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        Items = JsonSerializer.Deserialize<T>(Data,
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         return this;
     }
 }
