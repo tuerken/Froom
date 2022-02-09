@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Froom.Package", "src\Froom.Package\Froom.Package.csproj", "{13228DC4-E7A0-4102-A7FE-75CA6EB561F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Froom.Tests", "src\Froom.Tests\Froom.Tests.csproj", "{D3127C37-946B-49BF-9093-CE59D43493D4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{13228DC4-E7A0-4102-A7FE-75CA6EB561F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13228DC4-E7A0-4102-A7FE-75CA6EB561F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13228DC4-E7A0-4102-A7FE-75CA6EB561F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13228DC4-E7A0-4102-A7FE-75CA6EB561F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3127C37-946B-49BF-9093-CE59D43493D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3127C37-946B-49BF-9093-CE59D43493D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3127C37-946B-49BF-9093-CE59D43493D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3127C37-946B-49BF-9093-CE59D43493D4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
